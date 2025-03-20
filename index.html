@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sphere Visualizer</title>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+                background: #000;
+                color: #fff;
+                font-family: Arial, sans-serif;
+            }
+            #visualizer-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+            #controls {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 2;
+                background: rgba(0, 0, 0, 0.7);
+                padding: 20px;
+                border-radius: 10px;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+            button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 5px;
+                background: #333;
+                color: #fff;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+            button:hover {
+                background: #444;
+            }
+            button:disabled {
+                background: #222;
+                cursor: not-allowed;
+            }
+            input[type="range"] {
+                width: 100px;
+            }
+            .color-scheme-btn {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                cursor: pointer;
+            }
+            .color-scheme-btn.active {
+                border-color: #fff;
+            }
+            #ocean-btn {
+                background: #0077be;
+            }
+            #magenta-btn {
+                background: #ff00ff;
+            }
+            #emerald-btn {
+                background: #00cc44;
+            }
+            #sunset-btn {
+                background: #ff5500;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="visualizer-container"></div>
+        <div id="controls">
+            <input type="file" id="audio-file" accept="audio/*" />
+            <button id="play-btn">Play</button>
+            <button id="pause-btn" disabled>Pause</button>
+            <button id="sample-btn">Play Sample</button>
+            <button id="mic-btn">Use Microphone</button>
+            <label
+                >Volume:
+                <input
+                    type="range"
+                    id="volume"
+                    min="0"
+                    max="1"
+                    step="0.1"
+                    value="0.5"
+            /></label>
+            <label
+                >Size:
+                <input
+                    type="range"
+                    id="bar-height"
+                    min="0.1"
+                    max="2"
+                    step="0.1"
+                    value="1"
+            /></label>
+            <label
+                >Rotation:
+                <input
+                    type="range"
+                    id="rotation-speed"
+                    min="0"
+                    max="0.01"
+                    step="0.001"
+                    value="0.003"
+            /></label>
+            <label
+                >Wave:
+                <input
+                    type="range"
+                    id="color-intensity"
+                    min="0"
+                    max="2"
+                    step="0.1"
+                    value="1"
+            /></label>
+            <button
+                class="color-scheme-btn active"
+                id="ocean-btn"
+                data-scheme="ocean"
+            ></button>
+            <button
+                class="color-scheme-btn"
+                id="magenta-btn"
+                data-scheme="magenta"
+            ></button>
+            <button
+                class="color-scheme-btn"
+                id="emerald-btn"
+                data-scheme="emerald"
+            ></button>
+            <button
+                class="color-scheme-btn"
+                id="sunset-btn"
+                data-scheme="sunset"
+            ></button>
+        </div>
+
+        <!-- Three.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+        <!-- Visualizer Script -->
+        <script src="js/visualizer.js"></script>
+    </body>
+</html>
